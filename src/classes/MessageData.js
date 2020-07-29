@@ -2,6 +2,7 @@ import UserData from "./UserData";
 import moment from "moment";
 
 export default class MessageData {
+    #id
     #title
     #content
     #sender
@@ -34,20 +35,20 @@ export default class MessageData {
     get title() {
         return this.#title
     }
-
     get content() {
         return this.#content
     }
-
     get sender() {
         return this.#sender
     }
-
     get receiver() {
         return this.#receiver
     }
     get creationDate() {
         return this.#creationDate
+    }
+    get id() {
+        return this.#id;
     }
 
     get creationDateFromNow() {
