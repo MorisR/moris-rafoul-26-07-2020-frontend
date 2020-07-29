@@ -28,15 +28,14 @@ export default makeStyles(theme => ({
         display: "flex",
         flexDirection: "column",
         paddingLeft: theme.spacing(2),
-        width: "100%",
+        width: `calc(100% - ${theme.spacing(7)}px)`,
         boxSizing: "border-box",
     },
     textCaption: {
         textOverflow: "ellipsis",
         overflow: "hidden",
-        height: theme.spacing(2),
+        whiteSpace:"nowrap",
         width: "90%",
-        color: theme.palette.text.secondary,
     },
     creationDate: {
         paddingTop: theme.spacing(1),
