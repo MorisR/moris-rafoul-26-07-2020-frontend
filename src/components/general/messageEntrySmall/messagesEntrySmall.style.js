@@ -43,25 +43,3 @@ export default makeStyles(theme => ({
     },
 
 }))
-
-
-// export default makeStyles(theme => {
-//
-//     return {
-//         root: {
-//             background: theme.palette.background.paper,
-//             width:"100%",
-//         },
-//         centerContent:{
-//             display:"flex",
-//             justifyContent:"center",
-//             alignItems:"center",
-//         },
-//         icon:{
-//             height:"50px",
-//             width:"50px",
-//         }
-//
-//     }
-//
-// })
