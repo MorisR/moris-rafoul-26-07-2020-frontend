@@ -4,7 +4,7 @@ import {recoilKeys} from "../constants";
 import NavBarItem from "../classes/NavBarItem";
 
 
-const selectedMessageState = atom({
+const selectedNavBarItemState = atom({
     key: recoilKeys.SELECTED_NAV_BAR_ITEM,
     default: {},
 });
@@ -17,6 +17,6 @@ function setValue  (newValue,setState ){
 }
 
 export default function useState() {
-   const [getState,setState] = useRecoilState(selectedMessageState)
+   const [getState,setState] = useRecoilState(selectedNavBarItemState)
     return [getState, (newValue)=>setValue(newValue,setState)]
 }

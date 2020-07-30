@@ -4,7 +4,7 @@ import {recoilKeys} from "../constants";
 import UserData from "../classes/UserData";
 
 
-const selectedMessageState = atom({
+const loggedInUserState = atom({
     key: recoilKeys.LOGGED_IN_USER_STATE,
     default: undefined,
 });
@@ -17,6 +17,6 @@ function setValue  (newValue,setState ){
 }
 
 export default function useState() {
-   const [getState,setState] = useRecoilState(selectedMessageState)
+   const [getState,setState] = useRecoilState(loggedInUserState)
     return [getState, (newValue)=>setValue(newValue,setState)]
 }
