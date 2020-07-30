@@ -1,17 +1,14 @@
 import React from 'react';
 import {authApi} from "../../../modules/api";
-import {loggedInUserState, popupMessageState} from "../../../modules/globalRecoilStates";
-import UserData from "../../../modules/classes/UserData";
-import {Fade} from "@material-ui/core";
+import { popupMessageState} from "../../../modules/globalRecoilStates";
 import RegisterForm from "../../general/registerForm/registerForm";
-import {useHistory} from "react-router-dom"
-import {routes} from "../../../modules/constants";
 
-function RegisterScreen() {
-    const [, setLoggedInUser] = loggedInUserState()
+
+
+function RegisterScreen({onRegister}) {
     const [, setPopupMessage] = popupMessageState()
 
-    const history = useHistory()
+
 
     function registerFormSubmitHandler({email, password, firstName, lastName, confirmPassword} = {}, lockForm) {
 
@@ -29,21 +26,14 @@ function RegisterScreen() {
             }
 
             setPopupMessage({success:message})
-            const {ok: loginOk, user} = await authApi.login(email, password)
-            if (loginOk) {
-                setLoggedInUser(new UserData(user))
-                history.push(routes.DASHBOARD)
-            }
-
+            onRegister && onRegister({email, password, firstName, lastName})
         })()
 
     }
 
     return <div className="flexCenter flexDirectionColumn fullScreenHeight">
 
-        <Fade>
             <RegisterForm onSubmit={registerFormSubmitHandler}/>
-        </Fade>
     </div>
 }
 

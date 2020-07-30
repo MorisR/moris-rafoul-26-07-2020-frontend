@@ -4,16 +4,13 @@ import LoginForm from "../../general/loginForm/loginForm";
 import {authApi} from "../../../modules/api";
 import {loggedInUserState, popupMessageState} from "../../../modules/globalRecoilStates";
 import UserData from "../../../modules/classes/UserData";
-import {Fade} from "@material-ui/core";
-import {routes} from "../../../modules/constants";
-import {useHistory} from "react-router-dom";
 
 
-function LoginScreen() {
+
+function LoginScreen({onLogin}) {
     const [, setLoggedInUser] = loggedInUserState()
     const [, setPopupMessage] = popupMessageState()
 
-    const history = useHistory()
 
     function loginFormSubmitHandler({email, password} = {}, lockForm) {
 
@@ -28,7 +25,7 @@ function LoginScreen() {
             setLoggedInUser(new UserData(user))
             if (message)
                 setPopupMessage({success:message})
-            history.push(routes.DASHBOARD)
+            onLogin && onLogin({email,password})
 
 
         })()
@@ -37,9 +34,7 @@ function LoginScreen() {
     }
 
     return <div className="flexCenter flexDirectionColumn fullScreenHeight">
-        <Fade>
             <LoginForm onSubmit={loginFormSubmitHandler}/>
-        </Fade>
     </div>
 }
 

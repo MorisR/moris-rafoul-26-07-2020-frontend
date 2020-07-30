@@ -5,14 +5,16 @@ import {
     FormControl,
     IconButton,
     InputAdornment,
-    InputLabel, Link,
+    InputLabel,
     TextField,
+    Link as LinkUi
 } from "@material-ui/core";
 
 import {Visibility, VisibilityOff} from "@material-ui/icons";
 import useLoginStyle from "../loginForm/loginForm.style"
 import {routes} from "../../../modules/constants";
 import {popupMessageState} from "../../../modules/globalRecoilStates";
+import {Link} from "react-router-dom";
 
 function RegisterForm({onChange, onSubmit}) {
     const cssLoginClasses = useLoginStyle()
@@ -112,7 +114,7 @@ function RegisterForm({onChange, onSubmit}) {
                     disabled={formLocked}
                     type={"submit"}>Register!</Button>
 
-            <Link href={routes.LOGIN}>already a registered user? login.</Link>
+            <Link to={routes.LOGIN}><LinkUi component={"span"}>already a registered user? login.</LinkUi></Link>
 
         </form>
 
