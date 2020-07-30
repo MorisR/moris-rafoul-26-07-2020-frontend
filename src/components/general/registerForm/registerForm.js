@@ -1,20 +1,23 @@
-import React, {useEffect, useRef} from 'react';
+import React, {useEffect} from 'react';
 import {
     Button,
     FilledInput,
     FormControl,
     IconButton,
     InputAdornment,
-    InputLabel,
+    InputLabel, Link,
     TextField,
 } from "@material-ui/core";
 
-import { Visibility, VisibilityOff} from "@material-ui/icons";
+import {Visibility, VisibilityOff} from "@material-ui/icons";
 import useLoginStyle from "../loginForm/loginForm.style"
-import AlertMessage from "../alertMessage/alertMessage";
+import {routes} from "../../../modules/constants";
+import {popupMessageState} from "../../../modules/globalRecoilStates";
 
 function RegisterForm({onChange, onSubmit}) {
     const cssLoginClasses = useLoginStyle()
+    const [popupMessage] = popupMessageState()
+
     const [values, setValues] = React.useState({
         password: '',
         email: '',
@@ -26,10 +29,7 @@ function RegisterForm({onChange, onSubmit}) {
         showConfirmPassword: false,
 
     });
-    const [popupMessage, setPopupMessage] = React.useState({
-        error: undefined,
-        success: undefined
-    });
+
     const [formLocked, setFormLocked] = React.useState(false);
 
     useEffect(() => {
@@ -40,25 +40,17 @@ function RegisterForm({onChange, onSubmit}) {
     const handleChange = (prop) => (event) => {
         setValues({...values, [prop]: event.target.value});
     };
+    const handleFormSubmit = (event) => {
+        event.preventDefault()
+        if (onSubmit)
+            onSubmit(values,setFormLocked)
+    };
     const handleClickShowPassword = (fieldName) => () => {
         setValues({...values, [fieldName]: !values[fieldName]});
     };
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
     };
-    const handleFormSubmit = (event) => {
-        if (onSubmit)
-            onSubmit(event, values, {
-                showErrorMessage: (message)=> setPopupMessage({error: message}),
-                showSuccessMessage: (message)=> setPopupMessage({success: message}),
-                lockForm: (state)=> setFormLocked(state),
-
-            })
-    };
-    const handlerErrorPopupClose = () => {
-        setPopupMessage({})
-    }
-
 
     const textField = (label, valueFieldName, placeholder, autocomplete) => {
         return <TextField
@@ -73,8 +65,8 @@ function RegisterForm({onChange, onSubmit}) {
             autoComplete={autocomplete}
         />
     }
-    const passwordField = (label, valueFieldName,visibilityFieldName, placeholder, autocomplete) => {
-        return  <FormControl variant="filled" fullWidth>
+    const passwordField = (label, valueFieldName, visibilityFieldName, placeholder, autocomplete) => {
+        return <FormControl variant="filled" fullWidth>
             <InputLabel htmlFor={valueFieldName}>{label}</InputLabel>
             <FilledInput
                 disabled={formLocked}
@@ -103,33 +95,27 @@ function RegisterForm({onChange, onSubmit}) {
 
 
     return (
-        <>
-            <form onSubmit={handleFormSubmit}
-                  className={`${cssLoginClasses.root} ${popupMessage.error ? cssLoginClasses.rootError : ""}`}>
+        <form onSubmit={handleFormSubmit}
+              className={`${cssLoginClasses.root} ${popupMessage.error ? cssLoginClasses.rootError : ""}`}>
 
-                {textField("Email", "email","enter your email","email" )}
-                {textField("First Name", "firstName","enter your first name","given-name" )}
-                {textField("Last Name", "lastName","enter your last name","family-name" )}
-                {passwordField("Password","password","showPassword","enter your password","new-password")}
-                {passwordField("Confirm Password","confirmPassword","showConfirmPassword","confirm your password","new-password")}
-
-
-                <Button className={cssLoginClasses.submitButton}
-                        variant={"contained"}
-                        color={"primary"}
-                        fullWidth
-                        disabled={formLocked}
-                        type={"submit"}>Register!</Button>
+            {textField("Email", "email", "enter your email", "email")}
+            {textField("First Name", "firstName", "enter your first name", "given-name")}
+            {textField("Last Name", "lastName", "enter your last name", "family-name")}
+            {passwordField("Password", "password", "showPassword", "enter your password", "new-password")}
+            {passwordField("Confirm Password", "confirmPassword", "showConfirmPassword", "confirm your password", "new-password")}
 
 
-            </form>
+            <Button className={cssLoginClasses.submitButton}
+                    variant={"contained"}
+                    color={"primary"}
+                    fullWidth
+                    disabled={formLocked}
+                    type={"submit"}>Register!</Button>
 
-            <AlertMessage show={popupMessage.error || popupMessage.success}
-                          severity={popupMessage.error?"error": undefined }
-                          onClose={handlerErrorPopupClose} >
-                {popupMessage.error || popupMessage.success}
-            </AlertMessage>
-        </>
+            <Link href={routes.LOGIN}>already a registered user? login.</Link>
+
+        </form>
+
     );
 }
 

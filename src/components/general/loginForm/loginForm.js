@@ -1,28 +1,25 @@
-import React, {useEffect, useRef} from 'react';
+import React, {useEffect} from 'react';
 import {
     Button,
     FilledInput,
     FormControl,
     IconButton,
     InputAdornment,
-    InputLabel,
+    InputLabel, Link,
     TextField,
 } from "@material-ui/core";
 import {AccountCircle, Visibility, VisibilityOff} from "@material-ui/icons";
 import useStyle from "./loginForm.style"
-import AlertMessage from "../alertMessage/alertMessage";
+import {routes} from "../../../modules/constants";
+import {popupMessageState} from "../../../modules/globalRecoilStates";
 
 function LoginForm({onChange, onSubmit}) {
     const cssClasses = useStyle()
-
+    const [popupMessage] = popupMessageState()
     const [values, setValues] = React.useState({
         password: '',
         email: '',
         showPassword: false,
-    });
-    const [popupMessage, setPopupMessage] = React.useState({
-        error: undefined,
-        success: undefined
     });
     const [formLocked, setFormLocked] = React.useState(false);
 
@@ -41,21 +38,15 @@ function LoginForm({onChange, onSubmit}) {
         event.preventDefault();
     };
     const handleFormSubmit = (event) => {
+        event.preventDefault();
         if (onSubmit)
-            onSubmit(event, values, {
-                showErrorMessage: (message)=> setPopupMessage({error: message}),
-                showSuccessMessage: (message)=> setPopupMessage({success: message}),
-                lockForm: (state)=> setFormLocked(state),
+            onSubmit(values,setFormLocked)
 
-            })
     };
-    const handlerErrorPopupClose = () => {
-        setPopupMessage({})
-    }
+
 
 
     return (
-        <>
             <form  onSubmit={handleFormSubmit}
                   className={`${cssClasses.root} ${popupMessage.error ? cssClasses.rootError : ""}`}>
 
@@ -109,15 +100,11 @@ function LoginForm({onChange, onSubmit}) {
                         disabled={formLocked}
                         type={"submit"}>Login</Button>
 
+                <Link href={routes.REGISTER}>don't have an account? click here to register!</Link>
 
             </form>
 
-            <AlertMessage show={popupMessage.error || popupMessage.success }
-                          severity={popupMessage.error?"error": undefined }
-                          onClose={handlerErrorPopupClose} >
-                {popupMessage.error || popupMessage.success}
-            </AlertMessage>
-        </>
+
     );
 }
 
