@@ -4,7 +4,6 @@ import NavBar from "../../general/navBar/navBar";
 import MessagesList from "../../general/messagesEntryList/messagesList";
 import UserData from "../../../modules/classes/UserData";
 import MessageData from "../../../modules/classes/MessageData";
-import useStyle from "../../general/messagesEntryList/messagesList.style";
 
 const user = new UserData({email:"test@gmail.com", firstName:"moris", lastName:"rafoul",id:1})
 const message = new MessageData({title:"this is a test", sender:user, receiver:user,id:1})
@@ -20,11 +19,11 @@ const messagesArr = [
     message,
 ]
 function DashboardScreen(props) {
-    const cssClasses = useStyle()
+
 
     return (
 
-            <Grid container className={cssClasses.root}>
+            <Grid container >
                     <Grid item md={2}>
                     <NavBar/>
                 </Grid>
