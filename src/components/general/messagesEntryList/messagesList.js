@@ -7,7 +7,7 @@ import Divider from "@material-ui/core/Divider";
 function MessagesList({messages = []}) {
     const cssClasses = useStyle()
     return (
-        <List>
+        <List className={cssClasses.root}>
             {
                 messages.map(message =>
                     <>
