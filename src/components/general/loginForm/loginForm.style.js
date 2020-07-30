@@ -4,7 +4,7 @@ export default makeStyles(theme => ({
 
     root: {
         backgroundColor: theme.palette.primary.contrastText,
-        opacity: ".8",
+        opacity: ".95",
         padding: theme.spacing(2),
         boxSizing: "border-box",
         borderRadius: theme.shape.borderRadius,
