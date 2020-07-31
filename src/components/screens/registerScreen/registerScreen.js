@@ -1,7 +1,7 @@
 import React from 'react';
 import {authApi} from "../../../modules/api";
 import { popupMessageState} from "../../../modules/globalRecoilStates";
-import RegisterForm from "../../general/registerForm/registerForm";
+import RegisterForm from "../../general/registerForm";
 
 
 

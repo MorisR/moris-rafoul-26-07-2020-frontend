@@ -1,5 +1,5 @@
 import React from 'react';
-import MessageEntrySmall from "../messageEntrySmall/messageEntrySmall";
+import MessageEntrySmall from "../messageEntrySmall";
 import { List, Typography} from '@material-ui/core';
 import useStyle from "./messagesList.style"
 import Divider from "@material-ui/core/Divider";

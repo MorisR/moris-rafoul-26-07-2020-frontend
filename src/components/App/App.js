@@ -6,11 +6,11 @@ import {loggedInUserState} from "../../modules/globalRecoilStates";
 import RouteData from "../../modules/classes/RouteData";
 
 //components-----------------------------------------------------------------------
-import RegisterScreen from "../screens/registerScreen/registerScreen";
-import LoginScreen from "../screens/loginScreen/loginScreen";
-import DashboardScreen from "../screens/dashboardScreen/dashboardScreen";
+import RegisterScreen from "../screens/registerScreen";
+import LoginScreen from "../screens/loginScreen";
+import DashboardScreen from "../screens/dashboardScreen";
 
-import PopupMessage from "../general/popupMessage/popupMessage";
+import PopupMessage from "../general/popupMessage";
 import {routes} from "../../modules/constants";
 import {authApi} from "../../modules/api";
 import UserData from "../../modules/classes/UserData";
@@ -28,7 +28,6 @@ function App() {
         new RouteData(routes.REGISTER, <RegisterScreen onRegister={LoginAfterRegister}/>),
         new RouteData(routes.LOGIN, <LoginScreen onLogin={()=>history.push(routes.DASHBOARD)}/>),
         new RouteData(routes.DASHBOARD,<DashboardScreen/>),
-        // new RouteData(routes.REGISTER,<RegisterScreen/>),
     ]
 
 

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import LoginForm from "../../general/loginForm/loginForm";
+import LoginForm from "../../general/loginForm";
 import {authApi} from "../../../modules/api";
 import {loggedInUserState, popupMessageState} from "../../../modules/globalRecoilStates";
 import UserData from "../../../modules/classes/UserData";

@@ -1,6 +1,6 @@
 import React from 'react';
 import useStyle from "./navBarProfilePreview.style"
-import InitialsAvatarIcon from "../../initialsAvatarIcon/initialsAvatarIcon";
+import InitialsAvatarIcon from "../initialsAvatarIcon";
 import {Typography} from "@material-ui/core";
 import {loggedInUserState} from "../../../modules/globalRecoilStates";
 

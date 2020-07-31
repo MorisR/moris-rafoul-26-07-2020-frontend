@@ -1,8 +1,8 @@
 import React from 'react';
 import Grid from "@material-ui/core/Grid";
-import NavBar from "../../general/navBar/navBar";
-import MessagesList from "../../general/messagesEntryList/messagesList";
-import MessageEntryLarge from "../../general/messageEntryLarge/messageEntryLarge";
+import NavBar from "../../general/navBar";
+import MessagesList from "../../general/messagesEntryList";
+import MessageEntryLarge from "../../general/messageEntryLarge";
 import {selectedMessageState,selectedMessagesArrayState} from "../../../modules/globalRecoilStates";
 
 function DashboardScreen() {

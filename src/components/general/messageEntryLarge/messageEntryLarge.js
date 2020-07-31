@@ -3,7 +3,7 @@ import {Typography} from '@material-ui/core';
 import useStyle from "./messagesEntryLarge.style"
 import Grid from "@material-ui/core/Grid";
 import Divider from "@material-ui/core/Divider";
-import InitialsAvatarIcon from "../../initialsAvatarIcon/initialsAvatarIcon";
+import InitialsAvatarIcon from "../initialsAvatarIcon";
 
 
 function MessageEntryLarge({messageData}) {

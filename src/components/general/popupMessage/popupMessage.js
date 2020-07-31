@@ -1,5 +1,5 @@
 import React from 'react';
-import AlertMessage from "../alertMessage/alertMessage";
+import AlertMessage from "../alertMessage";
 import { popupMessageState} from "../../../modules/globalRecoilStates";
 
 function PopupMessage() {
