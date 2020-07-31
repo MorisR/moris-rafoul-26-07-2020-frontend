@@ -13,7 +13,7 @@ function NavBarProfilePreview({className}) {
             <InitialsAvatarIcon value={user.nameInitials} spacingSize={15} className={cssClasses.icon}/>
             <Typography component={"p"} className={cssClasses.label} className={`welcome`}
                         variant={"subtitle1"}>Wellcome</Typography>
-            <Typography component={"p"} variant={"h6"}>{user.fullName}</Typography>
+            <Typography  variant={"h6"}>{user.fullName}</Typography>
         </div>
     );
 }

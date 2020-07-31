@@ -10,22 +10,22 @@ function MessageEntrySmall({messageData, onClick}) {
     const theme = useTheme()
 
     return (
-        <ListItem onClick={onClick} button className={cssClasses.root} alignItems="flex-start">
+        <ListItem component={"div"} onClick={onClick} button className={cssClasses.root} alignItems="flex-start">
             <ListItemAvatar>
                 <InitialsAvatarIcon style={{marginRight: `${theme.spacing(2)}px`}}
                                     value={messageData?.sender?.nameInitials} spacingSize={6}/>
             </ListItemAvatar>
-            <ListItemText
+            <ListItemText secondaryTypographyProps={{component:"div"}}
                 primary={messageData?.sender?.fullName}
                 secondary={
                     <React.Fragment>
                         <div className={cssClasses.textsContainer}>
                             <Typography className={cssClasses.textCaption} variant={"subtitle1"}
-                                        color={"textSecondary"}>  {messageData?.title}</Typography>
+                                        color={"textSecondary"}>{messageData?.title}</Typography>
                             <Typography className={cssClasses.textCaption} variant={"caption"}
-                                        color={"textSecondary"}>  {messageData?.content}</Typography>
+                                        color={"textSecondary"}>{messageData?.content}</Typography>
                             <Typography className={cssClasses.creationDate}
-                                        variant={"caption"}> {messageData?.creationDateFromNow}</Typography>
+                                        variant={"caption"}>{messageData?.creationDateFromNow}</Typography>
                         </div>
                     </React.Fragment>
                 }

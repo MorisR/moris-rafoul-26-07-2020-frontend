@@ -25,7 +25,7 @@ function MessageEntryLarge({messageData}) {
                     <Grid item sm={2}>
                         <InitialsAvatarIcon value={messageData?.sender?.nameInitials} spacingSize={9}/>
                     </Grid>
-                    <Grid container sm={10} className={cssClasses.headerTexts}>
+                    <Grid container item sm={10} className={cssClasses.headerTexts}>
                         <Grid item sm={12}>
                             <Typography display={"inline"} variant={"h6"}
                                         color={"textPrimary"}>{messageData?.title}</Typography>
