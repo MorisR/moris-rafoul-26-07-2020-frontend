@@ -133,10 +133,14 @@ function NavBar() {
                 <ListItemText primary={"logout"}/>
             </ListItem>
             <Hidden>
-                <Dialog open={showComposeEmailPopup} onClose={setComposeEmailVisibility(false)}>
-                    <div  className={cssClasses.sendMessagePopup} >
+                <Dialog
+                    open={showComposeEmailPopup}
+                    fullScreen
+                    PaperProps={{ className:cssClasses.sendMessagePopup}}
+                    onClose={setComposeEmailVisibility(false)}>
+
+
                         <ComposeEmailForm  onSubmit={sendEmail}/>
-                    </div>
                 </Dialog>
             </Hidden>
         </nav>
