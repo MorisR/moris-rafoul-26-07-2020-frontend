@@ -134,7 +134,9 @@ function NavBar() {
             </ListItem>
             <Hidden>
                 <Dialog open={showComposeEmailPopup} onClose={setComposeEmailVisibility(false)}>
-                    <ComposeEmailForm onSubmit={sendEmail}/>
+                    <div  className={cssClasses.sendMessagePopup} >
+                        <ComposeEmailForm  onSubmit={sendEmail}/>
+                    </div>
                 </Dialog>
             </Hidden>
         </nav>

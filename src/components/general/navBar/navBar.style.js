@@ -35,5 +35,11 @@ export default makeStyles((theme) => ({
             color: theme.palette.secondary.contrastText,
         },
     },
+    sendMessagePopup:{
+        width: "50vw",
+        minWidth: "300px",
+        height: "50vh",
+        minHeight: "300px",
+    }
 
 }));

@@ -47,7 +47,7 @@ function ComposeEmailForm({onSubmit,onChange,className}) {
 
 
     return (
-        <form  onSubmit={handleFormSubmit} className={ `${cssClasses.root} ${className}`}>
+        <form  onSubmit={handleFormSubmit} className={ `${cssClasses.root} ${className}`} style={{margin:"0",height:"100%"}}>
             {textField("Email", "email", "enter your email", "email",{required:true})}
             {textField("Subject", "subject", "message title", "subject",{required:true})}
             {textField("body", "content", "", "content",{rows:5})}
