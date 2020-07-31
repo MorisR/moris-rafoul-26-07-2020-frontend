@@ -101,7 +101,7 @@ function LoginForm({onChange, onSubmit}) {
                         disabled={formLocked}
                         type={"submit"}>Login</Button>
 
-                <Link to={routes.REGISTER}><LinkUi>don't have an account? click here to register!</LinkUi></Link>
+                <Link to={routes.REGISTER}><LinkUi component={"span"}>don't have an account? click here to register!</LinkUi></Link>
             </form>
 
 
