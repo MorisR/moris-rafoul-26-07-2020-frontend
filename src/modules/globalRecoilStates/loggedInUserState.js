@@ -27,7 +27,6 @@ export default function useState() {
     function checkAndUpdateUserState() {
         (async ()=>{
             const data = await authApi.getCurrentUser()
-            console.log(data)
             if(!data  && getState )
                return  setState(undefined)
             if(data && !getState)

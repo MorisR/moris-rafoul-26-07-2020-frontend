@@ -11,7 +11,7 @@ const selectedMessageState = atom({
 
 
 function setValue  (newValue,setState ){
-    if(newValue === undefined || !newValue instanceof MessageData )
+    if(! newValue instanceof MessageData && newValue !== undefined )
         throw new Error("new value must be of type MessageData")
     setState(newValue)
 }

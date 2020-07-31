@@ -10,8 +10,8 @@ const selectedMessagesArrayState = atom({
 });
 
 
-function setValue(newValue, setState) {
-    if (!Array.isArray(newValue) || newValue.any(data => !data instanceof MessageData))
+function setValue(newValue = [], setState) {
+    if (!Array.isArray(newValue) || newValue.some(data => !data instanceof MessageData))
         throw new Error("new value must be an array of MessageData")
     setState(newValue)
 }
