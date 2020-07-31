@@ -52,7 +52,7 @@ export default class MessageData {
     }
 
     get creationDateFromNow() {
-        return moment(this.#creationDate).toNow()
+        return moment(this.#creationDate).fromNow()
     }
 }
 
