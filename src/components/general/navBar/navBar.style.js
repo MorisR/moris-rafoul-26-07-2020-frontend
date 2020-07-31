@@ -40,6 +40,14 @@ export default makeStyles((theme) => ({
         minWidth: "300px",
         height: "50vh",
         minHeight: "300px",
+    },
+    selectedItem:{
+        backgroundColor:theme.palette.secondary.light,
+        "&$selected": {
+            backgroundColor:theme.palette.secondary.light,
+        },
+        "&:hover": {
+            backgroundColor:theme.palette.secondary.light,
+        },
     }
-
 }));

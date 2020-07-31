@@ -10,6 +10,16 @@ export default makeStyles(theme => ({
         overflowY:"scroll",
         boxSizing:"border-box",
     },
+    selectedItem: {
+        backgroundColor: theme.palette.grey["400"],
+        "&$selected": {
+            backgroundColor: theme.palette.grey["500"],
 
+        },
+        "&:hover": {
+            backgroundColor: theme.palette.grey["500"],
+
+        },
+    },
 
 }))

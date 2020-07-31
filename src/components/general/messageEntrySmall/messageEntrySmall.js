@@ -4,13 +4,13 @@ import useStyle from "./messagesEntrySmall.style"
 import InitialsAvatarIcon from "../initialsAvatarIcon";
 
 
-function MessageEntrySmall({messageData, onClick}) {
+function MessageEntrySmall({messageData, onClick, className}) {
 
     const cssClasses = useStyle()
     const theme = useTheme()
 
     return (
-        <ListItem component={"div"} onClick={onClick} button className={cssClasses.root} alignItems="flex-start">
+        <ListItem component={"div"} onClick={onClick} button className={`${cssClasses.root} ${className}`} alignItems="flex-start">
             <ListItemAvatar>
                 <Badge
                     invisible={messageData?.isRead}

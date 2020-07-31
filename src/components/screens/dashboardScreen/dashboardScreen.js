@@ -20,11 +20,15 @@ function DashboardScreen() {
     function handleOnMessageClick(message,disableMessagesSelection) {
         (async () => {
             disableMessagesSelection(true)
+            //load the element
+            setSelectedMessage(message)
+
             const newMessageData = await markMessageAsRead(message)
             const newArr = selectedMessagesArray.map(data=> data.id=== newMessageData.id? newMessageData : data)
 
-            setSelectedMessagesArray(newArr)
+            //load the element again after update
             setSelectedMessage(newMessageData)
+            setSelectedMessagesArray(newArr)
             disableMessagesSelection(false)
 
         })()
