@@ -1,7 +1,7 @@
 import React from 'react';
 import {Typography, ListItem, ListItemAvatar, ListItemText, useTheme} from '@material-ui/core';
 import useStyle from "./messagesEntrySmall.style"
-import InitialsAvatarIcon from "../../initialsAvatarIcon/initialsAvatarIcon";
+import InitialsAvatarIcon from "../initialsAvatarIcon";
 
 
 function MessageEntrySmall({messageData, onClick}) {

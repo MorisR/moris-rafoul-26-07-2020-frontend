@@ -3,33 +3,41 @@ import UserData from "../classes/UserData";
 import MessageData from "../classes/MessageData";
 
 export async function getReceived() {
-    const {data:response} = await axios.get("/api/messages/received")
+    const {data: response} = await axios.get("/api/messages/received")
     if (response.ok)
         return response.data;
-    return  [];
+    return [];
 
 }
 
 export async function getSent() {
-    const {data:response} = await axios.get("/api/messages/sent")
+    const {data: response} = await axios.get("/api/messages/sent")
     if (response.ok)
         return response.data;
-    return  [];
+    return [];
 }
 
 export async function getTrash() {
-    const {data:response} = await axios.get("/api/messages/trash")
+    const {data: response} = await axios.get("/api/messages/trash")
     if (response.ok)
         return response.data;
 
 }
 
 export function rawToClass(arr = []) {
-    return arr.map(x=> {
+    return arr.map(x => {
         x.receiver = new UserData(x.receiver)
         x.sender = new UserData(x.sender)
         x.content = x.message
         x.title = x.subject
         return new MessageData(x)
     })
+}
+
+
+export async function sendEmail({email:recipientEmail, subject, content:message}) {
+    const {data: response} = await axios.post("/api/messages", {recipientEmail, subject, message})
+    console.log(response)
+
+    return response;
 }

@@ -27,7 +27,7 @@ function LoginForm({onChange, onSubmit}) {
     useEffect(() => {
         if (onChange)
             onChange(values)
-    })
+    },[onChange])
 
     const handleChange = (prop) => (event) => {
         setValues({...values, [prop]: event.target.value});
