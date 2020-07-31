@@ -1,8 +1,9 @@
 import React from 'react';
-import {Typography, Avatar} from '@material-ui/core';
+import {Typography} from '@material-ui/core';
 import useStyle from "./messagesEntryLarge.style"
 import Grid from "@material-ui/core/Grid";
 import Divider from "@material-ui/core/Divider";
+import InitialsAvatarIcon from "../../initialsAvatarIcon/initialsAvatarIcon";
 
 
 function MessageEntryLarge({messageData}) {
@@ -22,8 +23,7 @@ function MessageEntryLarge({messageData}) {
             <Grid item sm={12} className={cssClasses.header}>
                 <Grid container alignItems={"center"}>
                     <Grid item sm={2}>
-                        <Avatar variant={"circle"}
-                                className={cssClasses.headerIcon}>{messageData?.sender?.nameInitials}</Avatar>
+                        <InitialsAvatarIcon value={messageData?.sender?.nameInitials} spacingSize={9}/>
                     </Grid>
                     <Grid container sm={10} className={cssClasses.headerTexts}>
                         <Grid item sm={12}>

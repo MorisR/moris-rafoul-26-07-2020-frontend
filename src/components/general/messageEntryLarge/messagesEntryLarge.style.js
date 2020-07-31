@@ -14,18 +14,11 @@ export default makeStyles(theme => ({
         minHeight: "100vh",
         maxHeight: "100vh",
     },
-    headerIcon: {
-        color: theme.palette.primary.contrastText,
-        backgroundColor: theme.palette.primary.main,
-        boxShadow: theme.shadows[4],
-        width: theme.spacing(9),
-        height: theme.spacing(9),
-    },
     header:{
         height:theme.spacing(10)
     },
     headerTexts:{
-        paddingLeft:theme.spacing(1),
+        paddingLeft:theme.spacing(2),
 
     },
     creationDate: {
