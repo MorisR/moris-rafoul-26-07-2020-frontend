@@ -1,14 +1,14 @@
 import React from 'react';
-import {Card, Typography, Avatar,ListItem,ListItemAvatar,ListItemText} from '@material-ui/core';
+import {Typography, Avatar,ListItem,ListItemAvatar,ListItemText} from '@material-ui/core';
 import useStyle from "./messagesEntrySmall.style"
 
 
-function MessageEntrySmall({messageData}) {
+function MessageEntrySmall({messageData, onClick}) {
 
     const cssClasses = useStyle()
 
     return (
-        <ListItem button className={cssClasses.root} alignItems="flex-start">
+        <ListItem onClick={onClick} button className={cssClasses.root} alignItems="flex-start">
             <ListItemAvatar >
                 <Avatar variant={"circle"} className={cssClasses.icon} >{messageData?.sender?.nameInitials}</Avatar>
             </ListItemAvatar>

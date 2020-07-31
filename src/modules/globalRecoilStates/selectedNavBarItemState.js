@@ -6,12 +6,12 @@ import NavBarItem from "../classes/NavBarItem";
 
 const selectedNavBarItemState = atom({
     key: recoilKeys.SELECTED_NAV_BAR_ITEM,
-    default: {},
+    default: undefined,
 });
 
 
 function setValue  (newValue,setState ){
-    if(newValue === undefined || newValue instanceof NavBarItem )
+    if(newValue === undefined || !newValue instanceof NavBarItem )
         throw new Error("new value must be of type NavBarItem")
     setState(newValue)
 }

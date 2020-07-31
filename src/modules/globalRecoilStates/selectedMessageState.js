@@ -6,12 +6,12 @@ import MessageData from "../classes/MessageData";
 
 const selectedMessageState = atom({
     key: recoilKeys.SELECTED_MESSAGE_STATE,
-    default: {},
+    default: undefined,
 });
 
 
 function setValue  (newValue,setState ){
-    if(newValue === undefined || newValue instanceof MessageData )
+    if(newValue === undefined || !newValue instanceof MessageData )
         throw new Error("new value must be of type MessageData")
     setState(newValue)
 }

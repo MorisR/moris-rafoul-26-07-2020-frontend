@@ -5,15 +5,13 @@ export async function login(email, password) {
     const response = await axios.post("/api/auth/login", {email, password})
     returnVal = response.data || {};
     if (response.data.ok)
-    {
-        const userData = await getCurrentUser()
-        returnVal.user = userData.data
-    }
+        returnVal.user =  await getCurrentUser()
+
 
     return returnVal;
 }
 
-export async function logout(email, password) {
+export async function logout() {
 
     const response = await axios.get("/api/auth/logout")
     return response.data;
@@ -28,5 +26,5 @@ export async function register({email, password, firstName, lastName}) {
 export async function getCurrentUser() {
 
     const response = await axios.get("/api/auth/currentUser")
-    return response.data;
+    return response.data.data;
 }

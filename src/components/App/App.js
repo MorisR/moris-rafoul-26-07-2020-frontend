@@ -1,5 +1,5 @@
-import React from 'react';
-import {Switch, Route,useHistory} from "react-router-dom";
+import React, {useEffect} from 'react';
+import {Switch, Route, useHistory, useLocation} from "react-router-dom";
 
 //logic----------------------------------------------------------------------------
 import {loggedInUserState} from "../../modules/globalRecoilStates";
@@ -19,19 +19,10 @@ import UserData from "../../modules/classes/UserData";
 
 
 function App() {
-    const [loggedInUser,setLoggedInUser] = loggedInUserState()
+    const [loggedInUser, setLoggedInUser] = loggedInUserState()
     const history = useHistory()
+    const location = useLocation()
 
-    function LoginAfterRegister(email, password){
-        (async ()=>{
-            const {ok: loginOk, user} = await authApi.login(email, password)
-            if (loginOk) {
-                setLoggedInUser(new UserData(user))
-                history.push(routes.DASHBOARD)
-            }
-        })()
-
-    }
 
     const routesDataArr = [
         new RouteData(routes.REGISTER, <RegisterScreen onRegister={LoginAfterRegister}/>),
@@ -40,13 +31,47 @@ function App() {
         // new RouteData(routes.REGISTER,<RegisterScreen/>),
     ]
 
-    function addRoute({path, component}) {
-        return <Route key={path} exact path={path} render={()=>
-                <>{component}</>
-        }/>
 
+    function redirectIfLoggedIn(route) {
+
+        if (loggedInUser.isLoggedIn())
+            history.push(route)
 
     }
+    function redirectIfLoggedOut(route) {
+
+        if (!loggedInUser.isLoggedIn())
+            history.push(route)
+
+    }
+    function LoginAfterRegister(email, password) {
+        (async () => {
+            const {ok: loginOk, user} = await authApi.login(email, password)
+            if (loginOk) {
+                setLoggedInUser(new UserData(user))
+                history.push(routes.DASHBOARD)
+            }
+        })()
+
+    }
+    function addRoute({path, onBeforeRender, component}) {
+        onBeforeRender && onBeforeRender()
+        return <Route key={path} exact path={path}>
+            <>{component}</>
+        </Route>
+    }
+
+    useEffect(() => {
+        loggedInUser.checkAndUpdateUserState()
+        switch (location.pathname) {
+            case routes.LOGIN:
+            case routes.REGISTER:
+                redirectIfLoggedIn(routes.DASHBOARD)
+                break;
+            default:
+                redirectIfLoggedOut(routes.LOGIN)
+        }
+    }, [location,loggedInUser]);
 
     return (<div>
             <Switch>
