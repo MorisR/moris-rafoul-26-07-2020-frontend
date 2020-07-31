@@ -59,9 +59,7 @@ function App() {
             <>{component}</>
         </Route>
     }
-
-    useEffect(() => {
-        loggedInUser.checkAndUpdateUserState()
+    function  limitRoutes(){
         switch (location.pathname) {
             case routes.LOGIN:
             case routes.REGISTER:
@@ -70,13 +68,19 @@ function App() {
             default:
                 redirectIfLoggedOut(routes.LOGIN)
         }
+    }
+
+
+    useEffect(() => {
+        loggedInUser.checkAndUpdateUserState()
+        limitRoutes()
+
     }, [location,loggedInUser]);
 
     return (<div>
             <Switch>
                 {routesDataArr.map(addRoute)}
             </Switch>
-
 
             <PopupMessage/>
 

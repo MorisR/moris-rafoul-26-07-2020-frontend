@@ -8,8 +8,10 @@ export default class MessageData {
     #sender
     #receiver
     #creationDate
+    #isRead
+    #isTrash
 
-    constructor({title, content = "", sender, receiver,creationDate}) {
+    constructor({id,title, content = "", sender, receiver,creationDate,isRead,isTrash}) {
 
         if (!sender instanceof UserData)
             throw new Error("sender must be of type UserData")
@@ -25,11 +27,14 @@ export default class MessageData {
         if (!creationDate instanceof Date)
             throw new Error("creationDate must be of type Date")
 
+        this.#id = id;
         this.#title = title;
         this.#content = content;
         this.#sender = sender;
         this.#receiver = receiver;
         this.#creationDate = creationDate
+        this.#isRead = isRead
+        this.#isTrash = isTrash
     }
 
     get title() {
@@ -49,6 +54,12 @@ export default class MessageData {
     }
     get id() {
         return this.#id;
+    }
+    get isRead() {
+        return this.#isRead;
+    }
+    get isTrash() {
+        return this.#isTrash;
     }
 
     get creationDateFromNow() {
