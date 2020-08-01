@@ -28,14 +28,18 @@ export async function getTrash() {
 
 }
 
-
-export async function sendEmail({email:recipientEmail, subject, content:message}) {
+export async function sendMessage({email:recipientEmail, subject, content:message}) {
     const {data: response} = await axios.post("/api/messages", {recipientEmail, subject, message})
     return response;
 }
 export async function setReadState(messageId,isRead) {
     const {data: response} = await axios.post(`/api/messages/markAsRead/${messageId}/${Boolean(isRead)}`)
     return response;
+}
+export async function setTrashState(messageId,isTrash) {
+    const {data: response} = await axios.post(`/api/messages/trash/${messageId}/${Boolean(isTrash)}`)
+    return response;
+
 }
 
 
@@ -46,8 +50,6 @@ export function rawArrayToClassesArray(arr = []) {
 }
 
 export function rawToClass(element = []) {
-
-
     element.receiver =authApi.rawToClass(element.receiver)
     element.sender = authApi.rawToClass(element.sender)
     element.content = element.message;

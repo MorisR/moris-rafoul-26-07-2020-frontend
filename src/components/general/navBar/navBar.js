@@ -89,7 +89,7 @@ function NavBar() {
         (async () => {
             setDisableFormInput(true)
 
-            const {ok, message} = await messagesApi.sendEmail({email, content, subject})
+            const {ok, message} = await messagesApi.sendMessage({email, content, subject})
             setPopupMessage(ok ? {success: message} : {error: message})
             if (!ok)
                 setDisableFormInput(false)

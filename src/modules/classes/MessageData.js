@@ -9,9 +9,9 @@ export default class MessageData {
     #receiver
     #creationDate
     #isRead
-    #isTrash
+    #inTrash
 
-    constructor({id,title, content = "", sender, receiver,creationDate,isRead,isTrash}) {
+    constructor({id, title, content = "", sender, receiver, creationDate, isRead, inTrash}) {
 
         if (!sender instanceof UserData)
             throw new Error("sender must be of type UserData")
@@ -34,36 +34,57 @@ export default class MessageData {
         this.#receiver = receiver;
         this.#creationDate = creationDate
         this.#isRead = isRead
-        this.#isTrash = isTrash
+        this.#inTrash = inTrash
     }
 
     get title() {
         return this.#title
     }
+
     get content() {
         return this.#content
     }
+
     get sender() {
         return this.#sender
     }
+
     get receiver() {
         return this.#receiver
     }
+
     get creationDate() {
         return this.#creationDate
     }
+
     get id() {
         return this.#id;
     }
+
     get isRead() {
         return this.#isRead;
     }
-    get isTrash() {
-        return this.#isTrash;
+
+    get inTrash() {
+        return this.#inTrash;
     }
+
 
     get creationDateFromNow() {
         return moment(this.#creationDate).fromNow()
+    }
+
+    getRawObject() {
+        return {
+            id: this.#id,
+            title: this.#title,
+            content: this.#content,
+            sender: this.#sender,
+            receiver: this.#receiver,
+            creationDate: this.#creationDate,
+            isRead: this.#isRead,
+            isTrash: this.#inTrash,
+        }
     }
 }
 
