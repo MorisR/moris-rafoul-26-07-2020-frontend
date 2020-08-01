@@ -1,4 +1,5 @@
 import axios from "axios"
+import moment from "moment"
 import MessageData from "../classes/MessageData";
 import {authApi} from "./index";
 
@@ -53,6 +54,7 @@ export function rawToClass(element = []) {
     element.title = element.subject;
     element.isRead = element.messageSettings?.read;
     element.inTrash = element.messageSettings?.inTrash;
+    element.creationDate = moment(element.creationDate).toDate()
     return new MessageData(element)
 
 }
