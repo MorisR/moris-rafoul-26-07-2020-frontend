@@ -5,7 +5,7 @@ import MessagesList from "../../general/messagesList";
 import MessageEntryLarge from "../../general/messageEntryLarge";
 import {
     selectedMessageState,
-    selectedMessagesArrayState,
+    selectedMessagesArrayState, selectedNavBarItemState,
 } from "../../../modules/globalRecoilStates";
 import {messagesApi} from "../../../modules/api";
 import {Hidden} from "@material-ui/core";
@@ -13,7 +13,9 @@ import AppBarMidSizeScreen from "../../general/appBarMidSizeScreen";
 import AppBarSmallSizeScreen from "../../general/appBarSmallSizeScreen";
 
 function DashboardScreen() {
-    const [selectedMessagesArray, setSelectedMessagesArray] = selectedMessagesArrayState()
+    const [{updateArray,data:selectedMessagesArray}] = selectedMessagesArrayState()
+    const [selectedNavBarItem] = selectedNavBarItemState()
+
     const [selectedMessage, setSelectedMessage] = selectedMessageState()
 
 
@@ -30,11 +32,10 @@ function DashboardScreen() {
             setSelectedMessage(message)
 
             const newMessageData = await markMessageAsRead(message)
-            const newArr = selectedMessagesArray.map(data => data.id === newMessageData.id ? newMessageData : data)
+            await updateArray(selectedNavBarItem)
 
             //load the element again after update
             setSelectedMessage(newMessageData)
-            setSelectedMessagesArray(newArr)
             disableMessagesSelection(false)
 
         })()
@@ -89,6 +90,7 @@ function DashboardScreen() {
 
             <Grid item md={6}>
                 <Hidden smDown>
+                    {ifMessageIsSelected(<AppBarMidSizeScreen />)}
                     <MessageEntryLarge messageData={selectedMessage}/>
                 </Hidden>
             </Grid>

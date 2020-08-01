@@ -1,7 +1,8 @@
 import {atom} from "recoil";
 import {useRecoilState} from "recoil/dist";
-import {recoilKeys} from "../constants";
+import {navBarItemsNames, recoilKeys} from "../constants";
 import MessageData from "../classes/MessageData";
+import {messagesApi} from "../api";
 
 
 const selectedMessagesArrayState = atom({
@@ -16,7 +17,35 @@ function setValue(newValue = [], setState) {
     setState(newValue)
 }
 
+async function updateArray(fetchGroup, setState) {
+
+    switch (fetchGroup) {
+        case navBarItemsNames.INBOX:
+            const receivedMessagesData = await messagesApi.getReceived()
+            return setState(messagesApi.rawArrayToClassesArray(receivedMessagesData))
+
+        case navBarItemsNames.TRASH:
+            const trashMessagesData = await messagesApi.getTrash()
+            return setState(messagesApi.rawArrayToClassesArray(trashMessagesData))
+
+        case navBarItemsNames.SENT:
+            const sentMessagesData = await messagesApi.getSent()
+            console.log(sentMessagesData)
+            return setState(messagesApi.rawArrayToClassesArray(sentMessagesData))
+
+        default:
+            throw new Error("incorrect type was provided")
+
+    }
+}
+
 export default function useState() {
     const [getState, setState] = useRecoilState(selectedMessagesArrayState)
-    return [getState, (newValue) => setValue(newValue, setState)]
+
+
+    return [{
+        data: getState,
+        updateArray: (fetchGroup) => updateArray(fetchGroup, setState)
+    },
+        (newValue) => setValue(newValue, setState)]
 }

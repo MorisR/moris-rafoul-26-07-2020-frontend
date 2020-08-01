@@ -6,13 +6,19 @@ import {
     Restore as RestoreIcon,
 
 } from "@material-ui/icons";
-import {popupMessageState, selectedMessagesArrayState, selectedMessageState} from "../../../modules/globalRecoilStates";
+import {
+    popupMessageState,
+    selectedMessagesArrayState,
+    selectedMessageState,
+    selectedNavBarItemState
+} from "../../../modules/globalRecoilStates";
 import {messagesApi} from "../../../modules/api";
 import MessageData from "../../../modules/classes/MessageData";
 
 function AppBarMidSizeScreen() {
     const [selectedMessage, setSelectedMessage] = selectedMessageState()
-    const [messagesArray, setMessagesArray] = selectedMessagesArrayState()
+    const [{updateArray}] = selectedMessagesArrayState()
+    const [selectedNavBarItem] = selectedNavBarItemState()
     const [, setPopupMessage] = popupMessageState()
     const [lockIcons, setLockIcons] = useState(false)
 
@@ -23,9 +29,8 @@ function AppBarMidSizeScreen() {
                 const {ok, message} = await messagesApi.setTrashState(selectedMessage.id, state)
                 if (ok) {
                     const updatedMessage = new MessageData({...selectedMessage.getRawObject(), inTrash: state})
-                    const newArr = messagesArray.filter(data => data.id !== updatedMessage.id)
+                    await updateArray(selectedNavBarItem)
                     setSelectedMessage(updatedMessage)
-                    setMessagesArray(newArr)
                 }
                 setPopupMessage(ok ? {success: message} : {error: message})
                 setLockIcons(false)

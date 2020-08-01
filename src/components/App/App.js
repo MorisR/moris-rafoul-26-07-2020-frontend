@@ -55,15 +55,15 @@ function App() {
     }, [location, loggedInUser]);
 
 
-    function limitRoutesAccess(isLoggedin) {
+    function limitRoutesAccess(isLoggedIn) {
         switch (location.pathname) {
             case routes.LOGIN:
             case routes.REGISTER:
-                if(isLoggedin)
+                if(isLoggedIn)
                     history.push(routes.DASHBOARD)
                 break;
             default:
-                if(!isLoggedin)
+                if(!isLoggedIn)
                     history.push(routes.LOGIN)
 
         }
