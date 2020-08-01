@@ -12,8 +12,8 @@ const loggedInUserState = atom({
 
 
 function setValue(newValue, setState) {
-    if (newValue === undefined || !newValue instanceof UserData)
-        throw new Error("new value must be of type MessageData")
+    if (newValue !== undefined && !newValue instanceof UserData)
+        throw new Error("new value must be of type UserData")
     setState(newValue)
 }
 

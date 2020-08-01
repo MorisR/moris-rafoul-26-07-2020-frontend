@@ -43,38 +43,29 @@ function App() {
         (async ()=>{
             const user = await loggedInUser.checkAndUpdateUserState();
 
-            limitRoutesAccess();
+            limitRoutesAccess(user);
 
+
+            setInitialized(true)
             if (!initialized && user)
-            {
                 loadDashboardAfterLogin();
-                setInitialized(true)
-            }
+
         })()
 
     }, [location, loggedInUser]);
 
 
-    function redirectIfLoggedIn(route) {
-
-        if (loggedInUser.isLoggedIn())
-            history.push(route)
-
-    }
-    function redirectIfLoggedOut(route) {
-
-        if (!loggedInUser.isLoggedIn())
-            history.push(route)
-
-    }
-    function limitRoutesAccess() {
+    function limitRoutesAccess(isLoggedin) {
         switch (location.pathname) {
             case routes.LOGIN:
             case routes.REGISTER:
-                redirectIfLoggedIn(routes.DASHBOARD)
+                if(isLoggedin)
+                    history.push(routes.DASHBOARD)
                 break;
             default:
-                redirectIfLoggedOut(routes.LOGIN)
+                if(!isLoggedin)
+                    history.push(routes.LOGIN)
+
         }
     }
     function onUserRegister(email,password) {

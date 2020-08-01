@@ -9,7 +9,7 @@ function PopupMessage() {
     }
     return (
         <div>
-            <AlertMessage show={(popupMessage.error || popupMessage.success)}
+            <AlertMessage show={Boolean(popupMessage.error || popupMessage.success)}
                           severity={popupMessage.error?"error": undefined }
                           onClose={handlerErrorPopupClose} >
                 {popupMessage.error || popupMessage.success}
