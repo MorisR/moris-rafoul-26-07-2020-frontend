@@ -98,8 +98,6 @@ function App() {
             const messagesArrayClasses = messagesApi.rawArrayToClassesArray(messagesRawArray)
             setSelectedMessagesArray(messagesArrayClasses)
 
-            if (messagesArrayClasses.length)
-                setSelectedMessage(messagesArrayClasses?.[0])
         })()
     }
 
