@@ -13,3 +13,10 @@ export const routes = {
     HOME: "/",
     DASHBOARD: "/dashboard"
 }
+
+export const navBarItemsNames = {
+    INBOX: "Inbox",
+    SENT: "Sent",
+    TRASH: "Trash",
+    LOGOUT: "Logout",
+}

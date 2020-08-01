@@ -6,7 +6,7 @@ export default makeStyles((theme) => ({
         maxHeight:"100vh",
         boxSizing:"border-box",
         color:theme.palette.primary.contrastText,
-
+        backgroundColor:theme.palette.primary.dark
     },
     userProfileRoot:{
         padding: `${theme.spacing(1)}px ${theme.spacing(1)}px 0 ${theme.spacing(1)}px`,

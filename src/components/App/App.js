@@ -18,6 +18,7 @@ import RegisterScreen from "../screens/registerScreen";
 import LoginScreen from "../screens/loginScreen";
 import DashboardScreen from "../screens/dashboardScreen";
 import PopupMessage from "../general/popupMessage";
+import * as constants from "../../modules/constants";
 
 
 
@@ -91,7 +92,7 @@ function App() {
         (async () => {
 
             history.push(routes.DASHBOARD)
-            setSelectedNavBarItem("selected")
+            setSelectedNavBarItem(constants.navBarItemsNames.INBOX)
             const messagesRawArray = await messagesApi.getReceived()
 
 

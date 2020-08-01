@@ -1,11 +1,16 @@
-import React, {useState} from 'react';
+import React from 'react';
 import Grid from "@material-ui/core/Grid";
 import NavBar from "../../general/navBar";
 import MessagesList from "../../general/messagesList";
 import MessageEntryLarge from "../../general/messageEntryLarge";
-import {selectedMessageState, selectedMessagesArrayState} from "../../../modules/globalRecoilStates";
+import {
+    selectedMessageState,
+    selectedMessagesArrayState,
+} from "../../../modules/globalRecoilStates";
 import {messagesApi} from "../../../modules/api";
 import {Hidden} from "@material-ui/core";
+import AppBarMidSizeScreen from "../../general/appBarMidSizeScreen";
+import AppBarSmallSizeScreen from "../../general/appBarSmallSizeScreen";
 
 function DashboardScreen() {
     const [selectedMessagesArray, setSelectedMessagesArray] = selectedMessagesArrayState()
@@ -35,24 +40,59 @@ function DashboardScreen() {
         })()
     }
 
+    function ifMessageIsSelected(elementToRender) {
+        if (selectedMessage)
+            return elementToRender
+    }
+    function ifMessageIsNotSelected(elementToRender) {
+        if (!selectedMessage)
+            return elementToRender
+    }
+
     return (
 
-        <Grid container style={{backgroundColor: "Background"}} zeroMinWidth>
+        <Grid container style={{backgroundColor: "Background"}}>
+
             <Grid item md={2} sm={3}>
-                <Hidden  xsDown>
+                <Hidden xsDown>
                     <NavBar/>
                 </Hidden>
-
             </Grid>
+
             <Grid item md={4} sm={9} xs={12}>
-                <MessagesList onMessageClick={handleOnMessageClick} messages={selectedMessagesArray}/>
+
+                <Hidden mdUp>
+                    <Hidden smUp>
+                        <AppBarSmallSizeScreen title={selectedMessage?.title} onBackClick={()=>setSelectedMessage()} />
+                    </Hidden>
+
+                {ifMessageIsSelected(
+                    <>
+                        <Hidden mdUp >
+                            <Hidden xsDown>
+                                <AppBarMidSizeScreen />
+                            </Hidden>
+                            <MessageEntryLarge messageData={selectedMessage}/>
+                        </Hidden>
+                    </>
+                )}
+                {ifMessageIsNotSelected(
+                    <Hidden>
+                        <MessagesList onMessageClick={handleOnMessageClick} messages={selectedMessagesArray}/>
+                    </Hidden>
+                )}
+                </Hidden>
+                <Hidden smDown>
+                    <MessagesList onMessageClick={handleOnMessageClick} messages={selectedMessagesArray}/>
+                </Hidden>
             </Grid>
 
-            <Grid item md={6} >
+            <Grid item md={6}>
                 <Hidden smDown>
                     <MessageEntryLarge messageData={selectedMessage}/>
                 </Hidden>
             </Grid>
+
         </Grid>
 
 
