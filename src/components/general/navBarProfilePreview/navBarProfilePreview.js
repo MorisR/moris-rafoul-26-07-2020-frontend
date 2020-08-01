@@ -11,8 +11,7 @@ function NavBarProfilePreview({className}) {
     return (
         <div className={`flexCenter flexDirectionColumn ${cssClasses.root} ${className}`}>
             <InitialsAvatarIcon value={user.nameInitials} spacingSize={15} className={cssClasses.icon}/>
-            <Typography component={"p"} className={cssClasses.label} className={`welcome`}
-                        variant={"subtitle1"}>Wellcome</Typography>
+            <Typography component={"p"} className={cssClasses.label} variant={"subtitle1"}>Welcome</Typography>
             <Typography  variant={"h6"}>{user.fullName}</Typography>
         </div>
     );
