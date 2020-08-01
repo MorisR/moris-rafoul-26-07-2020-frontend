@@ -1,34 +1,59 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Switch, Route, useHistory, useLocation} from "react-router-dom";
 
 //logic----------------------------------------------------------------------------
-import {loggedInUserState} from "../../modules/globalRecoilStates";
+import {
+    loggedInUserState,
+    selectedMessagesArrayState,
+    selectedMessageState,
+    selectedNavBarItemState
+} from "../../modules/globalRecoilStates";
 import RouteData from "../../modules/classes/RouteData";
+import {authApi, messagesApi} from "../../modules/api";
+import {routes} from "../../modules/constants";
+
 
 //components-----------------------------------------------------------------------
 import RegisterScreen from "../screens/registerScreen";
 import LoginScreen from "../screens/loginScreen";
 import DashboardScreen from "../screens/dashboardScreen";
-
 import PopupMessage from "../general/popupMessage";
-import {routes} from "../../modules/constants";
-import {authApi} from "../../modules/api";
-import UserData from "../../modules/classes/UserData";
 
-//data----------------------------------------------------------------------------
+
 
 
 function App() {
-    const [loggedInUser, setLoggedInUser] = loggedInUserState()
+    const [loggedInUser] = loggedInUserState()
+    const [, setSelectedMessagesArray] = selectedMessagesArrayState()
+    const [, setSelectedMessage] = selectedMessageState()
+    const [, setSelectedNavBarItem] = selectedNavBarItemState()
+    const [initialized, setInitialized] = useState(false)
     const history = useHistory()
     const location = useLocation()
 
 
     const routesDataArr = [
-        new RouteData(routes.REGISTER, <RegisterScreen onRegister={LoginAfterRegister}/>),
-        new RouteData(routes.LOGIN, <LoginScreen onLogin={()=>history.push(routes.DASHBOARD)}/>),
-        new RouteData(routes.DASHBOARD,<DashboardScreen/>),
+        new RouteData(routes.REGISTER, <RegisterScreen onRegister={onUserRegister}/>),
+        new RouteData(routes.LOGIN, <LoginScreen onLogin={onUserLogin}/>),
+        new RouteData(routes.DASHBOARD, <DashboardScreen/>),
     ]
+
+
+    useEffect(() => {
+
+        (async ()=>{
+            const user = await loggedInUser.checkAndUpdateUserState();
+
+            limitRoutesAccess();
+
+            if (!initialized && user)
+            {
+                loadDashboardAfterLogin();
+                setInitialized(true)
+            }
+        })()
+
+    }, [location, loggedInUser]);
 
 
     function redirectIfLoggedIn(route) {
@@ -43,23 +68,7 @@ function App() {
             history.push(route)
 
     }
-    function LoginAfterRegister(email, password) {
-        (async () => {
-            const {ok: loginOk, user} = await authApi.login(email, password)
-            if (loginOk) {
-                setLoggedInUser(new UserData(user))
-                history.push(routes.DASHBOARD)
-            }
-        })()
-
-    }
-    function addRoute({path, onBeforeRender, component}) {
-        onBeforeRender && onBeforeRender()
-        return <Route key={path} exact path={path}>
-            <>{component}</>
-        </Route>
-    }
-    function  limitRoutes(){
+    function limitRoutesAccess() {
         switch (location.pathname) {
             case routes.LOGIN:
             case routes.REGISTER:
@@ -69,23 +78,48 @@ function App() {
                 redirectIfLoggedOut(routes.LOGIN)
         }
     }
-
-
-    useEffect(() => {
+    function onUserRegister(email,password) {
+            authApi.login(email,password)
+                .then(loggedInUser.checkAndUpdateUserState)
+                .then(loadDashboardAfterLogin)
+    }
+    function onUserLogin() {
         loggedInUser.checkAndUpdateUserState()
-        limitRoutes()
+            .then(loadDashboardAfterLogin)
+    }
+    function loadDashboardAfterLogin() {
+        (async () => {
 
-    }, [location,loggedInUser]);
+            history.push(routes.DASHBOARD)
+            setSelectedNavBarItem("selected")
+            const messagesRawArray = await messagesApi.getReceived()
+
+
+            const messagesArrayClasses = messagesApi.rawArrayToClassesArray(messagesRawArray)
+            setSelectedMessagesArray(messagesArrayClasses)
+
+            if (messagesArrayClasses.length)
+                setSelectedMessage(messagesArrayClasses?.[0])
+        })()
+    }
+
+
+    function renderRoute({path, onBeforeRender, component}) {
+        onBeforeRender && onBeforeRender()
+        return <Route key={path} exact path={path}>
+            <>{component}</>
+        </Route>
+    }
+
 
     return (<div>
-            <Switch>
-                {routesDataArr.map(addRoute)}
-            </Switch>
+        <Switch>
+            {routesDataArr.map(renderRoute)}
+        </Switch>
 
-            <PopupMessage/>
+        <PopupMessage/>
 
-        </div>
-    );
+    </div>);
 }
 
 export default App;

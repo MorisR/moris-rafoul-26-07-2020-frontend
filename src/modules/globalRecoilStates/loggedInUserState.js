@@ -24,20 +24,27 @@ export default function useState() {
     function isLoggedIn() {
         return getState !== undefined && getState instanceof UserData
     }
-    function checkAndUpdateUserState() {
-        (async ()=>{
-            const data = await authApi.getCurrentUser()
-            if(!data  && getState )
-               return  setState(undefined)
-            if(data && !getState)
-                return  setState(new UserData(data))
-            if(data && getState)
-                if(data.id !== getState.id)
-                return  setState(new UserData(data))
-        })()
+
+    async function checkAndUpdateUserState() {
+
+        const data = await authApi.getCurrentUser();
+
+        if (!data) {
+            setState(undefined);
+            return;
+        }
+
+        if (getState?.id === data.id)
+            return getState;
+
+
+        const userData = authApi.rawToClass(data)
+        setState(userData);
+
+        return userData;
     }
 
 
-    return [{user:getState,isLoggedIn, checkAndUpdateUserState}, (newValue) => setValue(newValue, setState)]
+    return [{user: getState, isLoggedIn, checkAndUpdateUserState}, (newValue) => setValue(newValue, setState)]
 }
 

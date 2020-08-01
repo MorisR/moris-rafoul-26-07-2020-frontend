@@ -2,13 +2,11 @@ import React from 'react';
 
 import LoginForm from "../../general/loginForm";
 import {authApi} from "../../../modules/api";
-import {loggedInUserState, popupMessageState} from "../../../modules/globalRecoilStates";
-import UserData from "../../../modules/classes/UserData";
+import { popupMessageState} from "../../../modules/globalRecoilStates";
 
 
 
 function LoginScreen({onLogin}) {
-    const [, setLoggedInUser] = loggedInUserState()
     const [, setPopupMessage] = popupMessageState()
 
 
@@ -22,10 +20,11 @@ function LoginScreen({onLogin}) {
                 lockForm(false)
                 return;
             }
-            setLoggedInUser(new UserData(user))
             if (message)
                 setPopupMessage({success:message})
-            onLogin && onLogin({email,password})
+
+
+            onLogin && onLogin(user)
 
 
         })()

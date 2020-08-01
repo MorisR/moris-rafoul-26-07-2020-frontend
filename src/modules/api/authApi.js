@@ -1,4 +1,5 @@
 import axios from "axios"
+import UserData from "../classes/UserData";
 
 export async function login(email, password) {
     let returnVal;
@@ -27,4 +28,8 @@ export async function getCurrentUser() {
 
     const response = await axios.get("/api/auth/currentUser")
     return response.data.data;
+}
+
+export function rawToClass(raw) {
+    return new UserData(raw);
 }
