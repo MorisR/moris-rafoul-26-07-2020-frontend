@@ -3,7 +3,7 @@
 ## Important Notes 
 - this project was made in 7 days alongside the backend project [(link to the backend project)](https://github.com/MorisR/moris-rafoul-26-07-2020-backend)
 - this is my first time ever using "material ui", I had to learn it on the spot in 1~2 days
-
+- the code is not as clean or user friendly as I would've wanted it to be, I’m still trying to figure out the best strategy for it. 
 
 
 ### Installation
@@ -13,7 +13,7 @@
     npm install
     ```
 3) add .env file to the root of the project
-    - you can do that by remaming the ".env_template" file in the root directory to ".env" and filling in the correct values
+    - you can do that by renaming the ".env_template" file in the root directory to ".env" and filling in the correct values
     - read [".env file"](https://github.com/MorisR/moris-rafoul-26-07-2020-backend/issues/25) for more info about the values and purpose of each field
 4) start the server running the following command
     ```
