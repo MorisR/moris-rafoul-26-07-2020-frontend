@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Grid from "@material-ui/core/Grid";
 import NavBar from "../../general/navBar";
 import MessagesList from "../../general/messagesList";
@@ -15,9 +15,13 @@ import AppBarSmallSizeScreen from "../../general/appBarSmallSizeScreen";
 function DashboardScreen() {
     const [{updateArray,data:selectedMessagesArray}] = selectedMessagesArrayState()
     const [selectedNavBarItem] = selectedNavBarItemState()
-
     const [selectedMessage, setSelectedMessage] = selectedMessageState()
 
+    //fetch messages every couple of seconds
+    useEffect(()=>{
+        const intervalId = setInterval(updateLoadedMessagesArray,1000* Number(process.env.REACT_APP_CHECK_MESSAGES_EVERY_SECONDS || 20))
+        return()=>clearInterval(intervalId)
+    },[selectedMessagesArray])
 
     async function markMessageAsRead(message) {
         await messagesApi.setReadState(message.id, true)
@@ -32,7 +36,7 @@ function DashboardScreen() {
             setSelectedMessage(message)
 
             const newMessageData = await markMessageAsRead(message)
-            await updateArray(selectedNavBarItem)
+            await updateLoadedMessagesArray()
 
             //load the element again after update
             setSelectedMessage(newMessageData)
@@ -49,6 +53,11 @@ function DashboardScreen() {
         if (!selectedMessage)
             return elementToRender
     }
+    async function updateLoadedMessagesArray() {
+        await updateArray(selectedNavBarItem)
+    }
+
+
 
     return (
 

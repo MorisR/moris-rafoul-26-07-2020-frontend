@@ -35,7 +35,7 @@ function NavBar() {
     const cssClasses = useStyle()
     const theme = useTheme()
     const iconsColor = theme.palette.secondary.contrastText;
-    const [, setSelectedMessagesArr] = selectedMessagesArrayState()
+    const [{updateArray}, setSelectedMessagesArr] = selectedMessagesArrayState()
     const [, setSelectedMessage] = selectedMessageState()
     const [, setLoggedInUser] = loggedInUserState()
     const [, setPopupMessage] = popupMessageState()
@@ -106,12 +106,13 @@ function NavBar() {
             if (!ok)
                 setDisableFormInput(false)
 
-            else setShowComposeEmailPopup(false)
-            //todo reset the popup fields
+            else{
+                await updateArray(selectedNavBarItem)
+                setShowComposeEmailPopup(false)
+            }
 
         })()
     }
-
 
     function renderUserPreview() {
         return <NavBarProfilePreview className={cssClasses.userProfileRoot}/>
