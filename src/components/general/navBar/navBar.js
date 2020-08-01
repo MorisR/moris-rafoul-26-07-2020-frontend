@@ -25,7 +25,6 @@ import {authApi, messagesApi} from "../../../modules/api";
 import {
     popupMessageState,
     selectedMessagesArrayState,
-    selectedMessageState,
     selectedNavBarItemState
 } from "../../../modules/globalRecoilStates";
 import ComposeEmailForm from "../composeEmailForm";
@@ -38,7 +37,6 @@ function NavBar() {
     const theme = useTheme()
     const iconsColor = theme.palette.secondary.contrastText;
     const [, setSelectedMessagesArr] = selectedMessagesArrayState()
-    const [, setSelectedMessage] = selectedMessageState()
     const [, setPopupMessage] = popupMessageState()
     const [selectedNavBarItem, setSelectedNavBarItem] = selectedNavBarItemState()
 
@@ -52,7 +50,6 @@ function NavBar() {
             setLockNavBar(true)
             const arrayOfMessages = await messagesApi.getReceived()
             setSelectedMessagesArr(messagesApi.rawArrayToClassesArray(arrayOfMessages))
-            setSelectedMessage(arrayOfMessages?.[0])
             setLockNavBar(false)
         })()
 
@@ -63,7 +60,6 @@ function NavBar() {
             setLockNavBar(true)
             const arrayOfMessages = await messagesApi.getSent()
             setSelectedMessagesArr(messagesApi.rawArrayToClassesArray(arrayOfMessages))
-            setSelectedMessage(arrayOfMessages?.[0])
             setLockNavBar(false)
         })()
 
@@ -74,7 +70,6 @@ function NavBar() {
             setLockNavBar(true)
             const arrayOfMessages = await messagesApi.getTrash()
             setSelectedMessagesArr(messagesApi.rawArrayToClassesArray(arrayOfMessages))
-            setSelectedMessage(arrayOfMessages?.[0])
             setLockNavBar(false)
         })()
 
