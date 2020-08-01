@@ -2,15 +2,24 @@ import React from 'react';
 import {Typography, ListItem, Badge, ListItemAvatar, ListItemText, useTheme} from '@material-ui/core';
 import useStyle from "./messagesEntrySmall.style"
 import InitialsAvatarIcon from "../initialsAvatarIcon";
+import {loggedInUserState} from "../../../modules/globalRecoilStates";
 
 
 function MessageEntrySmall({messageData, onClick, className}) {
-
+    const [{user: loggedInUser}] = loggedInUserState()
     const cssClasses = useStyle()
     const theme = useTheme()
 
+    function getSenderName() {
+        console.log()
+        if (loggedInUser.id !== messageData?.sender.id)
+            return messageData?.sender?.fullName
+        else return "To: " + messageData?.receiver?.fullName
+    }
+
     return (
-        <ListItem component={"div"} onClick={onClick} button className={`${cssClasses.root} ${className}`} alignItems="flex-start">
+        <ListItem component={"div"} onClick={onClick} button className={`${cssClasses.root} ${className}`}
+                  alignItems="flex-start">
             <ListItemAvatar>
                 <Badge
                     invisible={messageData?.isRead}
@@ -29,7 +38,7 @@ function MessageEntrySmall({messageData, onClick, className}) {
 
 
             <ListItemText secondaryTypographyProps={{component: "div"}}
-                          primary={messageData?.sender?.fullName}
+                          primary={getSenderName()}
                           secondary={
                               <React.Fragment>
                                   <div className={cssClasses.textsContainer}>
