@@ -52,7 +52,7 @@ function App() {
 
         })()
 
-    }, [location, loggedInUser]);
+    }, [location, loggedInUser.user]);
 
 
     function limitRoutesAccess(isLoggedIn) {
