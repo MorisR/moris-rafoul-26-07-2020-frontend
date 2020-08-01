@@ -15,7 +15,7 @@
 3) add .env file to the root of the project
     - you can do that by remaming the ".env_template" file in the root directory to ".env" and filling in the correct values
     - read [".env file"](https://github.com/MorisR/moris-rafoul-26-07-2020-backend/issues/25) for more info about the values and purpose of each field
-4) start the server using the following command
+4) start the server running the following command
     ```
     npm start
     ```
