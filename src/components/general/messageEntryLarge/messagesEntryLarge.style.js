@@ -14,9 +14,7 @@ export default makeStyles(theme => ({
         minHeight: "100vh",
         maxHeight: "100vh",
     },
-    header:{
-        height:theme.spacing(10)
-    },
+
     headerTexts:{
         paddingLeft:theme.spacing(2),
 
