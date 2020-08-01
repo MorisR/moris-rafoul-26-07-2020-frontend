@@ -1,0 +1,4 @@
+[[redirects]]
+  from = "/api/*"
+  to = "https://herolo-messaging-app-backend.herokuapp.com/:splat"
+  status = 200
