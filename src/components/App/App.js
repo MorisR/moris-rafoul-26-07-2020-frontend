@@ -5,7 +5,6 @@ import {Switch, Route, useHistory, useLocation} from "react-router-dom";
 import {
     loggedInUserState,
     selectedMessagesArrayState,
-    selectedMessageState,
     selectedNavBarItemState
 } from "../../modules/globalRecoilStates";
 import RouteData from "../../modules/classes/RouteData";
@@ -26,7 +25,6 @@ import * as constants from "../../modules/constants";
 function App() {
     const [loggedInUser] = loggedInUserState()
     const [, setSelectedMessagesArray] = selectedMessagesArrayState()
-    const [, setSelectedMessage] = selectedMessageState()
     const [, setSelectedNavBarItem] = selectedNavBarItemState()
     const [initialized, setInitialized] = useState(false)
     const history = useHistory()
