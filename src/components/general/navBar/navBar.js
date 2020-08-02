@@ -2,12 +2,10 @@ import React, {useState} from 'react';
 import {
     List,
     ListItem,
-    Hidden,
     Button,
     ListItemIcon,
     ListItemText,
     useTheme,
-    Dialog
 } from '@material-ui/core';
 
 import {
@@ -25,9 +23,8 @@ import {
     loggedInUserState,
     popupMessageState,
     selectedMessagesArrayState, selectedMessageState,
-    selectedNavBarItemState
+    selectedNavBarItemState,composeMessagePopVisibilityState
 } from "../../../modules/globalRecoilStates";
-import ComposeEmailForm from "../composeEmailForm";
 import {navBarItemsNames} from "../../../modules/constants";
 
 
@@ -35,14 +32,15 @@ function NavBar() {
     const cssClasses = useStyle()
     const theme = useTheme()
     const iconsColor = theme.palette.secondary.contrastText;
-    const [{updateArray}, setSelectedMessagesArr] = selectedMessagesArrayState()
+    const [, setSelectedMessagesArr] = selectedMessagesArrayState()
     const [, setSelectedMessage] = selectedMessageState()
     const [, setLoggedInUser] = loggedInUserState()
     const [, setPopupMessage] = popupMessageState()
     const [selectedNavBarItem, setSelectedNavBarItem] = selectedNavBarItemState()
+    const [,setComposeMessagePopVisibility] = composeMessagePopVisibilityState()
 
     const [lockNavBar, setLockNavBar] = useState(false)
-    const [showComposeEmailPopup, setShowComposeEmailPopup] = useState(false)
+
 
 
     function loadReceived() {
@@ -56,7 +54,6 @@ function NavBar() {
         })()
 
     }
-
     function loadSent() {
         (async () => {
             setSelectedNavBarItem(navBarItemsNames.SENT)
@@ -68,7 +65,6 @@ function NavBar() {
         })()
 
     }
-
     function loadTrash() {
         (async () => {
             setSelectedNavBarItem(navBarItemsNames.TRASH)
@@ -80,7 +76,6 @@ function NavBar() {
         })()
 
     }
-
     function logout() {
         (async () => {
             setLockNavBar(true)
@@ -95,32 +90,10 @@ function NavBar() {
         })()
     }
 
-    function setComposeEmailVisibility(state) {
-        return () => setShowComposeEmailPopup(state)
-    }
-
-    function sendEmail({email, content, subject}, setDisableFormInput) {
-
-        (async () => {
-            setDisableFormInput(true)
-
-            const {ok, message} = await messagesApi.sendMessage({email, content, subject})
-            setPopupMessage(ok ? {success: message} : {error: message})
-            if (!ok)
-                setDisableFormInput(false)
-
-            else{
-                await updateArray(selectedNavBarItem)
-                setShowComposeEmailPopup(false)
-            }
-
-        })()
-    }
 
     function renderUserPreview() {
         return <NavBarProfilePreview className={cssClasses.userProfileRoot}/>
     }
-
     function renderListItems() {
         return <div className={cssClasses.listContainer}>
             <List className={cssClasses.list}>
@@ -131,9 +104,8 @@ function NavBar() {
             </List>
         </div>
     }
-
     function renderComposeButton() {
-        return <ListItem onClick={setComposeEmailVisibility(true)}>
+        return <ListItem onClick={()=>setComposeMessagePopVisibility(true)}>
             <Button
                 startIcon={<AddIcon/>}
                 color={"secondary"}
@@ -143,7 +115,6 @@ function NavBar() {
             </Button>
         </ListItem>
     }
-
     function renderGetReceivedMessagesButton() {
         return <ListItem button
                          onClick={loadReceived}
@@ -152,7 +123,6 @@ function NavBar() {
             <ListItemText primary={navBarItemsNames.INBOX}/>
         </ListItem>
     }
-
     function renderGetSentMessagesButton() {
         return <ListItem button
                          onClick={loadSent}
@@ -162,7 +132,6 @@ function NavBar() {
             <ListItemText primary={navBarItemsNames.SENT}/>
         </ListItem>
     }
-
     function renderGetTrashMessagesButton() {
         return <ListItem button
                          onClick={loadTrash}
@@ -172,7 +141,6 @@ function NavBar() {
             <ListItemText primary={navBarItemsNames.TRASH}/>
         </ListItem>
     }
-
     function renderLogoutButton() {
         return <ListItem button onClick={logout}>
             <ListItemIcon><VpnKeyIcon htmlColor={iconsColor}/></ListItemIcon>
@@ -180,28 +148,16 @@ function NavBar() {
         </ListItem>
     }
 
-    function renderComposeMessagePopup() {
-        return <Hidden>
-            <Dialog
-                open={showComposeEmailPopup}
-                fullScreen
-                PaperProps={{className: cssClasses.sendMessagePopup}}
-                onClose={setComposeEmailVisibility(false)}>
-
-
-                <ComposeEmailForm onSubmit={sendEmail}/>
-            </Dialog>
-        </Hidden>
-    }
 
 
     return (
 
         <nav className={cssClasses.root} style={{pointerEvents: lockNavBar ? "none" : "unset"}}>
+
             {renderUserPreview()}
             {renderListItems()}
             {renderLogoutButton()}
-            {renderComposeMessagePopup()}
+
         </nav>
 
     );

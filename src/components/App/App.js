@@ -18,6 +18,7 @@ import LoginScreen from "../screens/loginScreen";
 import DashboardScreen from "../screens/dashboardScreen";
 import PopupMessage from "../general/popupMessage";
 import * as constants from "../../modules/constants";
+import ComposeMessagePopup from "../general/composeMessagePopup/composeMessagePopup";
 
 
 
@@ -106,7 +107,7 @@ function App() {
         </Switch>
 
         <PopupMessage/>
-
+        <ComposeMessagePopup/>
     </div>);
 }
 

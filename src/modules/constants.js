@@ -4,7 +4,8 @@ export const recoilKeys = {
     SELECTED_NAV_BAR_ITEM: "selectedNavBarItem",
     LOGGED_IN_USER_STATE: "LOGGED_IN_USER_STATE",
     POPUP_MESSAGE_STATE: "popupMessageState",
-    SELECTED_MESSAGE_ARRAY_STATE: "messageArrayState"
+    SELECTED_MESSAGE_ARRAY_STATE: "messageArrayState",
+    POPUP_SEND_MESSAGE_STATE: "composeMessagePopVisibilityState"
 }
 
 export const routes = {
