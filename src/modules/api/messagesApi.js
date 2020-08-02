@@ -2,6 +2,7 @@ import axios from "axios"
 import moment from "moment"
 import MessageData from "../classes/MessageData";
 import {authApi} from "./index";
+axios.defaults.withCredentials = true
 
 
 export async function getMessage(messageId) {
@@ -30,15 +31,15 @@ export async function getTrash() {
 const backendRoute = process.env.REACT_APP_BACKEND_API_HOST
 
 export async function sendMessage({email:recipientEmail, subject, content:message}) {
-    const {data: response} = await axios.post(`${backendRoute}/messages`, {recipientEmail, subject, message},{withCredentials: true})
+    const {data: response} = await axios.post(`${backendRoute}/messages`, {recipientEmail, subject, message})
     return response;
 }
 export async function setReadState(messageId,isRead) {
-    const {data: response} = await axios.post(`${backendRoute}/messages/markAsRead/${messageId}/${Boolean(isRead)}`,{withCredentials: true})
+    const {data: response} = await axios.post(`${backendRoute}/messages/markAsRead/${messageId}/${Boolean(isRead)}`)
     return response;
 }
 export async function setTrashState(messageId,isTrash) {
-    const {data: response} = await axios.post(`${backendRoute}/messages/trash/${messageId}/${Boolean(isTrash)}`,{withCredentials: true})
+    const {data: response} = await axios.post(`${backendRoute}/messages/trash/${messageId}/${Boolean(isTrash)}`)
     return response;
 
 }
