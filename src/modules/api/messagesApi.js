@@ -6,24 +6,24 @@ axios.defaults.withCredentials = true
 
 
 export async function getMessage(messageId) {
-    const {data: response} = await axios.get(`/api/messages/${messageId}`)
+    const {data: response} = await axios.get(`/api/messages/${messageId}`,{withCredentials:true})
     return response.data;
 }
 export async function getReceived() {
-    const {data: response} = await axios.get("/api/messages/received")
+    const {data: response} = await axios.get("/api/messages/received",{withCredentials:true})
     if (response.ok)
         return response.data;
     return [];
 
 }
 export async function getSent() {
-    const {data: response} = await axios.get("/api/messages/sent")
+    const {data: response} = await axios.get("/api/messages/sent",{withCredentials:true})
     if (response.ok)
         return response.data;
     return [];
 }
 export async function getTrash() {
-    const {data: response} = await axios.get("/api/messages/trash")
+    const {data: response} = await axios.get("/api/messages/trash",{withCredentials:true})
     if (response.ok)
         return response.data;
 
