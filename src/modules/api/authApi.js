@@ -3,7 +3,7 @@ import UserData from "../classes/UserData";
 const backendRoute = process.env.REACT_APP_BACKEND_API_HOST
 export async function login(email, password) {
     let returnVal;
-    const response = await axios.post(`${backendRoute}/api/auth/login`, {email, password})
+    const response = await axios.post(`${backendRoute}/auth/login`, {email, password})
     returnVal = response.data || {};
     if (response.data.ok)
         returnVal.user =  await getCurrentUser()
@@ -14,19 +14,19 @@ export async function login(email, password) {
 
 export async function logout() {
 
-    const response = await axios.get(`${backendRoute}/api/auth/logout`)
+    const response = await axios.get(`${backendRoute}/auth/logout`)
     return response.data;
 }
 
 export async function register({email, password, firstName, lastName}) {
 
-    const response = await axios.post(`${backendRoute}/api/auth/register`, {email, password, firstName, lastName})
+    const response = await axios.post(`${backendRoute}/auth/register`, {email, password, firstName, lastName})
     return response.data;
 }
 
 export async function getCurrentUser() {
 
-    const response = await axios.get(`${backendRoute}/api/auth/currentUser`)
+    const response = await axios.get(`${backendRoute}/auth/currentUser`)
     return response.data.data;
 }
 

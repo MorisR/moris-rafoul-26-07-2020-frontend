@@ -62,7 +62,7 @@ function App() {
                 if(isLoggedIn)
                     history.push(routes.DASHBOARD)
                 break;
-            case routes.DASHBOARD:
+            default:
                 if(!isLoggedIn)
                     history.push(routes.LOGIN)
 
