@@ -35,8 +35,8 @@ https://moris-rafoul-26-07-2020.netlify.app/
 - material-ui
 - recoil (a state manager similar to redux)
 
-### Multi Screen Sizes Support 
-
+### Featurs
+- Multi Screen Sizes Support 
 <table>
   <tr>
     <td>
@@ -49,6 +49,7 @@ https://moris-rafoul-26-07-2020.netlify.app/
       <img src="https://user-images.githubusercontent.com/10247681/89106707-c8c59000-d434-11ea-8ed7-f571f63f73e0.png">
     </td>
 </table>
+- the ability to delete a message
 
 
 
