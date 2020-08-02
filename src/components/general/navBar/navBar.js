@@ -51,6 +51,7 @@ function NavBar() {
             setLockNavBar(true)
             const arrayOfMessages = await messagesApi.getReceived()
             setSelectedMessagesArr(messagesApi.rawArrayToClassesArray(arrayOfMessages))
+            setSelectedMessage()
             setLockNavBar(false)
         })()
 
@@ -62,6 +63,7 @@ function NavBar() {
             setLockNavBar(true)
             const arrayOfMessages = await messagesApi.getSent()
             setSelectedMessagesArr(messagesApi.rawArrayToClassesArray(arrayOfMessages))
+            setSelectedMessage()
             setLockNavBar(false)
         })()
 
@@ -73,6 +75,7 @@ function NavBar() {
             setLockNavBar(true)
             const arrayOfMessages = await messagesApi.getTrash()
             setSelectedMessagesArr(messagesApi.rawArrayToClassesArray(arrayOfMessages))
+            setSelectedMessage()
             setLockNavBar(false)
         })()
 
