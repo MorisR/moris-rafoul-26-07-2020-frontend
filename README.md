@@ -10,7 +10,7 @@
     - hosting the website on differant hosting services ( firebase / heroku / netlify ) returned doffrant results on each one
     - when I made a call to the backed to clear the cookies, it didn't happen ( yet creating the cookies seemed to work just fine...)
  the issue turned out to be that the app was cashing the api calls to the backend :/ (the more you know), I’ve got it working now
-- **I would really like the opportunity to grow and gain more experience, I’m willing to put in the effort, whatever it takes!*
+- **I would really like the opportunity to grow and gain more experience, I’m willing to put in the effort, whatever it takes!**
 
 ### Installation
 1) clone the repo 
