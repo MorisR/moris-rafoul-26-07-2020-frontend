@@ -14,19 +14,19 @@ export async function login(email, password) {
 
 export async function logout() {
 
-    const response = await axios.get(`${backendRoute}/auth/logout`)
+    const response = await axios.get(`${backendRoute}/auth/logout`,{withCredentials: true})
     return response.data;
 }
 
 export async function register({email, password, firstName, lastName}) {
 
-    const response = await axios.post(`${backendRoute}/auth/register`, {email, password, firstName, lastName})
+    const response = await axios.post(`${backendRoute}/auth/register`, {email, password, firstName, lastName},{withCredentials: true})
     return response.data;
 }
 
 export async function getCurrentUser() {
 
-    const response = await axios.get(`${backendRoute}/auth/currentUser`)
+    const response = await axios.get(`${backendRoute}/auth/currentUser`,{withCredentials: true})
     return response.data.data;
 }
 
