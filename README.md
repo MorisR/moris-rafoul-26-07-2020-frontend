@@ -1,4 +1,5 @@
 # moris-rafoul-26-07-2020 - frontend
+https://moris-rafoul-26-07-2020.netlify.app/
 
 ## Important Notes 
 - this project was made in a week alongside the backend project [(link to the backend project)](https://github.com/MorisR/moris-rafoul-26-07-2020-backend)
