@@ -3,6 +3,7 @@ import moment from "moment"
 import MessageData from "../classes/MessageData";
 import {authApi} from "./index";
 axios.defaults.withCredentials = true
+const backendRoute = process.env.REACT_APP_BACKEND_API_HOST
 
 
 export async function getMessage(messageId) {
@@ -28,7 +29,6 @@ export async function getTrash() {
         return response.data;
 
 }
-const backendRoute = process.env.REACT_APP_BACKEND_API_HOST
 
 export async function sendMessage({email:recipientEmail, subject, content:message}) {
     const {data: response} = await axios.post(`/${backendRoute}/messages`, {recipientEmail, subject, message})
