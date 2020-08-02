@@ -48,7 +48,9 @@ which gave me plenty of problems to deal with afterwards (cooikies not being pas
       <img src="https://user-images.githubusercontent.com/10247681/89106707-c8c59000-d434-11ea-8ed7-f571f63f73e0.png">
     </td>
 </table>
+
 - the ability to delete a message
+
 ![image](https://user-images.githubusercontent.com/10247681/89118114-d66a2c80-d4ab-11ea-8739-f89a59ade3ab.png)
 
 
