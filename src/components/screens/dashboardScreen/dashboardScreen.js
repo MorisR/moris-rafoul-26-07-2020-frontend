@@ -100,7 +100,7 @@ function DashboardScreen() {
             <Grid item md={6}>
                 <Hidden smDown>
                     {ifMessageIsSelected(<AppBarMidSizeScreen />)}
-                    <MessageEntryLarge messageData={selectedMessage}/>
+                    <MessageEntryLarge messageData={selectedMessage} />
                 </Hidden>
             </Grid>
 

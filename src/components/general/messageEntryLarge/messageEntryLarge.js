@@ -59,7 +59,7 @@ function MessageEntryLarge({messageData}) {
 
     function renderBody() {
         return <Grid item xs={12}>
-            <Typography component={"p"} display={"inline"} variant={"subtitle2"}
+            <Typography component={"p"} display={"block"} className={cssClasses.messageContent}  variant={"subtitle2"}
                         color={"textPrimary"}>{messageData?.content}</Typography>
 
         </Grid>

@@ -11,8 +11,9 @@ export default makeStyles(theme => ({
             {paddingBottom: theme.spacing(1),},
         boxSizing: "border-box",
         padding: theme.spacing(2),
-        minHeight: "100vh",
-        maxHeight: "100vh",
+        maxHeight:"100vh",
+        minHeight:"100vh",
+        overflowY:"scroll"
     },
 
     headerTexts:{
@@ -24,6 +25,8 @@ export default makeStyles(theme => ({
         alignSelf: "flex-end"
     },
     messageContent: {
-        overflowY: "scroll"
-    }
+        wordBreak:'word',
+        overflowY: "scroll",
+        paddingBottom: "70px"
+}
 }))
