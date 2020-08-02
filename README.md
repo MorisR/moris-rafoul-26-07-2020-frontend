@@ -4,14 +4,13 @@ https://moris-rafoul-26-07-2020.netlify.app/
 ## Important Notes 
 - this project was made in a week alongside the backend project [(link to the backend project)](https://github.com/MorisR/moris-rafoul-26-07-2020-backend)
 - this is my first time ever using "material ui", I had to learn it on the spot and master it in 1~2 days
-- I've tried my best to make the code as user friendly as I could (within the given time frame), although I’m still trying to figure out the best strategy for it. 
-- when I tried to host the front end app, I came across some difficulties because of the way I proxied the api calls to the backend, 
-    - the routes mall functioned
-    - the cross-origin functionality didn't function correctly 
-    - hosting the website on differant hosting services ( firebase / heroku / netlify ) returned doffrant results on each one
-    - when I made a call to the backed to clear the cookies, it didn't happen ( yet creating the cookies seemed to work just fine...)
- the issue turned out to be that the app was cashing the api calls to the backend :/ (the more you know), I’ve got it working now
-- **I would really like the opportunity to grow and gain more experience, I’m willing to put in the effort, whatever it takes!**
+- I've tried my best to make the code as mush user friendly as I could within the given time frame, 
+    - although tbh to me it still feels like a mess..
+    - I’m still trying to figure out the best strategy for it. 
+- I came across some difficulties in hosting the app because initially I used proxy to forward the api calls to the backend, 
+which gave me plenty of problems to deal with afterwards (cooikies not being passed/diffrant hosting services giving diffrant results/ etc...)
+- **I can't deny that I am still a joiner developer, I'm still learning ( from mistakes, from the experience, trial and error, etc...)**
+- **I would really like the opportunity to grow and gain more experience, I’m willing to put in the effort, give it whatever it takes!**
 
 ### Installation
 1) clone the repo 
