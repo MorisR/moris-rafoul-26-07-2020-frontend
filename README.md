@@ -49,6 +49,7 @@ which gave me plenty of problems to deal with afterwards (cooikies not being pas
     </td>
 </table>
 - the ability to delete a message
+![image](https://user-images.githubusercontent.com/10247681/89118114-d66a2c80-d4ab-11ea-8739-f89a59ade3ab.png)
 
 
 
