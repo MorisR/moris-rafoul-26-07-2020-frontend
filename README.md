@@ -1,10 +1,16 @@
 # moris-rafoul-26-07-2020 - frontend
 
 ## Important Notes 
-- this project was made in 7 days alongside the backend project [(link to the backend project)](https://github.com/MorisR/moris-rafoul-26-07-2020-backend)
-- this is my first time ever using "material ui", I had to learn it on the spot in 1~2 days
-- the code is not as clean or user friendly as I would've wanted it to be, I’m still trying to figure out the best strategy for it. 
-
+- this project was made in a week alongside the backend project [(link to the backend project)](https://github.com/MorisR/moris-rafoul-26-07-2020-backend)
+- this is my first time ever using "material ui", I had to learn it on the spot and master it in 1~2 days
+- I've tried my best to make the code as user friendly as I could (within the given time frame), although I’m still trying to figure out the best strategy for it. 
+- when I tried to host the front end app, I came across some difficulties because of the way I proxied the api calls to the backend, 
+    - the routes mall functioned
+    - the cross-origin functionality didn't function correctly 
+    - hosting the website on differant hosting services ( firebase / heroku / netlify ) returned doffrant results on each one
+    - when I made a call to the backed to clear the cookies, it didn't happen ( yet creating the cookies seemed to work just fine...)
+ the issue turned out to be that the app was cashing the api calls to the backend :/ (the more you know), I’ve got it working now
+- **I would really like the opportunity to grow and gain more experience, I’m willing to put in the effort, whatever it takes!*
 
 ### Installation
 1) clone the repo 
