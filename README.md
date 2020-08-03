@@ -1,6 +1,8 @@
 # moris-rafoul-26-07-2020 - frontend
 https://moris-rafoul-26-07-2020.netlify.app/
 
+**wait a couple of seconds after entering the page, because the backend in hosted on heroku under the free tier, so it takees some time to initially load up**
+
 ## Important Notes 
 - this project was made in a week alongside the backend project [(link to the backend project)](https://github.com/MorisR/moris-rafoul-26-07-2020-backend)
 - this is my first time ever using "material ui", I had to learn it on the spot and master it in 1~2 days
