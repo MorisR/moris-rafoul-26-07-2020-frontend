@@ -11,7 +11,6 @@ function MessageEntrySmall({messageData, onClick, className}) {
     const theme = useTheme()
 
     function getSenderName() {
-        console.log()
         if (loggedInUser.id !== messageData?.sender.id)
             return messageData?.sender?.fullName
         else return "To: " + messageData?.receiver?.fullName

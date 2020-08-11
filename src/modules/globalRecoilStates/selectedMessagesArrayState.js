@@ -30,7 +30,6 @@ async function updateArray(fetchGroup, setState) {
 
         case navBarItemsNames.SENT:
             const sentMessagesData = await messagesApi.getSent()
-            console.log(sentMessagesData)
             return setState(messagesApi.rawArrayToClassesArray(sentMessagesData))
 
         default:
